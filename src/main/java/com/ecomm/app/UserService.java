@@ -7,16 +7,20 @@ import java.util.List;
 
 @Service
 public class UserService {
-    private List<User> userList = new ArrayList<>();
-    private Long increID = 1L;
+  private List<User> userList = new ArrayList<>();
+  private Long increID = 1L;
 
-    public List<User> fetchUsers(){
-        return userList;
-    }
+  public List<User> fetchUsers() {
+    return userList;
+  }
 
-    public String createUser(User user){
-        user.setId(increID++);
-        userList.add(user);
-        return "User added successfully";
-    }
+  public User getUser(int id) {
+    return id <= userList.size() ? userList.get(id-1) : null;
+  }
+
+  public String createUser(User user) {
+    user.setId(increID++);
+    userList.add(user);
+    return "User added successfully";
+  }
 }
