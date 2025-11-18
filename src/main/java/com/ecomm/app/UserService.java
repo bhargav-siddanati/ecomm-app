@@ -8,12 +8,14 @@ import java.util.List;
 @Service
 public class UserService {
     private List<User> userList = new ArrayList<>();
+    private Long increID = 1L;
 
     public List<User> fetchUsers(){
         return userList;
     }
 
     public String createUser(User user){
+        user.setId(increID++);
         userList.add(user);
         return "User added successfully";
     }
