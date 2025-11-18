@@ -1,5 +1,6 @@
 package com.ecomm.app;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,17 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
-    private List<User> userList = new ArrayList<>();
+
+    private final UserService userService;
 
     @GetMapping("/users")
     public List<User> getUsers(){
-        return userList;
+        return userService.fetchUsers();
     }
 
     @PostMapping("/addUser")
     public String addUser(@RequestBody User user){
-        userList.add(user);
-        return "User added successfully";
+        return userService.createUser(user);
     }
 }
