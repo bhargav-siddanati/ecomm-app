@@ -39,4 +39,12 @@ public class UserController {
      */
     return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
   }
+
+  @PutMapping("/updateUser/{id}")
+  public ResponseEntity<String> modifyUser(@PathVariable Long id, @RequestBody User user){
+    boolean isUserUpdated = userService.updateExistedUser(id, user);
+    if(isUserUpdated)
+      return ResponseEntity.ok("User data updated successfully");
+    return new ResponseEntity<>("User data not existed", HttpStatus.NOT_FOUND);
+  }
 }
