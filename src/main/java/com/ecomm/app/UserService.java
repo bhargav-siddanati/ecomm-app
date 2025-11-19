@@ -15,7 +15,15 @@ public class UserService {
   }
 
   public User getUser(int id) {
-    return id <= userList.size() ? userList.get(id-1) : null;
+    //return id <= userList.size() ? userList.get(id-1) : null;
+    User response = null;
+    for(User user : userList){
+      if (user.getId().equals(id)) {
+        response = user;
+        break;
+        }
+    }
+    return response;
   }
 
   public String createUser(User user) {
