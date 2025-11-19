@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -14,12 +15,9 @@ public class UserService {
     return userList;
   }
 
-  public User getUser(Long id) {
-    for(User user : userList){
-      if (user.getId().equals(id))
-        return user;
-    }
-    return null;
+  public Optional<User> getUser(Long id) {
+    return userList.stream().filter(user -> user.getId().equals(id))
+            .findAny();
   }
 
   public String createUser(User user) {

@@ -20,11 +20,23 @@ public class UserController {
 
   @GetMapping("/getUser/{id}")
   public ResponseEntity<User> getUser(@PathVariable Long id) {
-    return ResponseEntity.ok(userService.getUser(id));
+    return userService.getUser(id)
+            .map(ResponseEntity::ok)
+            .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @PostMapping("/addUser")
   public ResponseEntity<String> addUser(@RequestBody User user) {
+    /*
+    URI location = ServletUriComponentsBuilder
+        .fromCurrentRequest()
+        .path("/{id}")
+        .buildAndExpand(savedUser.getId())
+        .toUri();
+
+    return ResponseEntity.created(location).body(savedUser);
+
+     */
     return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
   }
 }
