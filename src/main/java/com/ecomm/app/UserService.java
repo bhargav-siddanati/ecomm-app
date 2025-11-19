@@ -14,16 +14,12 @@ public class UserService {
     return userList;
   }
 
-  public User getUser(int id) {
-    //return id <= userList.size() ? userList.get(id-1) : null;
-    User response = null;
+  public User getUser(Long id) {
     for(User user : userList){
-      if (user.getId().equals(id)) {
-        response = user;
-        break;
-        }
+      if (user.getId().equals(id))
+        return user;
     }
-    return response;
+    return null;
   }
 
   public String createUser(User user) {
