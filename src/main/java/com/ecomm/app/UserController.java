@@ -9,23 +9,24 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/user")
 public class UserController {
 
   private final UserService userService;
-
-  @GetMapping("/users")
+  //@RequestMapping(value="/users", method = RequestMethod.GET)
+  @GetMapping
   public ResponseEntity<List<User>> getUsers() {
     return ResponseEntity.ok(userService.fetchUsers());
   }
 
-  @GetMapping("/getUser/{id}")
+  @GetMapping("{id}")
   public ResponseEntity<User> getUser(@PathVariable Long id) {
     return userService.getUser(id)
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
-  @PostMapping("/addUser")
+  @PostMapping("/add")
   public ResponseEntity<String> addUser(@RequestBody User user) {
     /*
     URI location = ServletUriComponentsBuilder
@@ -40,7 +41,7 @@ public class UserController {
     return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
   }
 
-  @PutMapping("/updateUser/{id}")
+  @PutMapping("/update/{id}")
   public ResponseEntity<String> modifyUser(@PathVariable Long id, @RequestBody User user){
     boolean isUserUpdated = userService.updateExistedUser(id, user);
     if(isUserUpdated)
