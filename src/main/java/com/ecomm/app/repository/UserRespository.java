@@ -1,5 +1,6 @@
-package com.ecomm.app;
+package com.ecomm.app.repository;
 
+import com.ecomm.app.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
