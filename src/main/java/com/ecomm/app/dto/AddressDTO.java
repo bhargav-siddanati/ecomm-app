@@ -1,0 +1,16 @@
+package com.ecomm.app.dto;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class AddressDTO {
+    private String street;
+    private String city;
+    private String state;
+    private String country;
+    private String zipcode;
+}
