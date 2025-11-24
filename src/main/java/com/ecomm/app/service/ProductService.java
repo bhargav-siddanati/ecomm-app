@@ -51,4 +51,11 @@ public class ProductService {
                     return true;
                 }).orElse(false);
     }
+
+    public List<ProductResponse> serachByKeyword(String keyword) {
+        return productRepository.searchProducts(keyword)
+                .stream()
+                .map(existing -> testMapper.productToProductResponse(existing))
+                .collect(Collectors.toList());
+    }
 }
