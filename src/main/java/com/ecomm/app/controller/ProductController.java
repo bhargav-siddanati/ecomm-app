@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -19,6 +21,10 @@ public class ProductController {
                 HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> getAllProducts(){
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponse> updateProduct(
             @PathVariable Long id,
@@ -26,5 +32,10 @@ public class ProductController {
         return productService.updateProduct(id, productRequest)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        return productService.deleteProductById(id) ? ResponseEntity.noContent().build()
+        :ResponseEntity.notFound().build();
     }
 }
