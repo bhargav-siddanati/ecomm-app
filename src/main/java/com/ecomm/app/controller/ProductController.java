@@ -2,7 +2,6 @@ package com.ecomm.app.controller;
 
 import com.ecomm.app.dto.ProductRequest;
 import com.ecomm.app.dto.ProductResponse;
-import com.ecomm.app.entity.Product;
 import com.ecomm.app.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
