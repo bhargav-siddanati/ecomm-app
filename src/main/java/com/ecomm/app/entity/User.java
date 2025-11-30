@@ -1,5 +1,6 @@
 package com.ecomm.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity(name = "user_table")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
